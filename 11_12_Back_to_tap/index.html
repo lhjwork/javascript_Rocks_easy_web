@@ -59,7 +59,36 @@
             // 스크롤 이벤트 추가
             window.addEventListener('scroll', function(){
                 scrollPos = docElem.scrollTop;
+                
+                console.log(scrollPos);
+
+                btt.className = (scrollPos > offest) ? 'visible':'';
             })
+
+            btt.addEventListener('click', function(e){
+                // 링크의 본연의 기능을 막는다.
+                e.preventDefault();
+
+                scrollToTop();
+        
+            })
+
+            function scrollToTop(){
+                // 일정시간마다 할일
+                // var scrollInterval =  setInterval(할일, 시간)
+                // 0.0015s =15
+                // 실제로 할일 윈도우 스크롤이 0이 아닐떄 window.scrollBy(0, -55);
+                // 스크롤이 0이면 SEtInterval 멈춰라. clearInterval(이름)
+
+                var scrollInterval =  setInterval(function(){
+                    if(scrollPos != 0){
+                        // 윈도우의 스크롤 양을 조금씩 뻄
+                        window.scrollBy(0, -55);
+                    }else{
+                        clearInterval(scrollInterval)
+                    }
+                }, 15)
+            }
 
             // 클릭 이벤트 추가
 
